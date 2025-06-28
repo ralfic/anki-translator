@@ -1,0 +1,14 @@
+build/
+
+# Python cache/bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Other IDE/filesystem clutter
+.vscode/
+.idea/
+*.swp
+
+*.egg-info/

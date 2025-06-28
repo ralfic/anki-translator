@@ -1,0 +1,20 @@
+[project]
+name = "add_anki_words"
+version = "0.1"
+description = "A tool to add words to Anki"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.32.4",
+    "PySide6>=6.9.1",
+    "qasync>=0.27.1",
+    "asyncio>=3.4.3",
+    "googletrans>=4.0.2",
+    "clipboard>=0.0.4",
+    "pynput>=1.8.1",
+
+
+]
+
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
