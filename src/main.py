@@ -2,25 +2,38 @@ import sys
 from PySide6.QtWidgets import QApplication
 from qasync import QEventLoop
 import asyncio
-from ui.main_window import MainWindow
-from api.anki_api import AnkiConnect
-from api.translation import TranslationService
+from api.anki_service import AnkiService
+from api.translators.googletrans_service import GoogleTransService
+from api.translators.deepl_service import DeeplService
+from ui.pages.staked_widget import StackedWidget
+from environs import Env
+from utils.config_manager import ConfigManager
+
 
 def main():
     app = QApplication(sys.argv)
     loop = QEventLoop(app)
     asyncio.set_event_loop(loop)
-    
+
+    # Load environment variables
+    env = Env()
+    env.read_env()
+
     # Initialize services
-    anki_connect = AnkiConnect()
-    translation_service = TranslationService()
-    
-    window = MainWindow(anki_connect, translation_service)
+    anki_service = AnkiService()
+    googletrans_service = GoogleTransService()
+    deepl_service = DeeplService()
+
+    # Initialize config
+    config = ConfigManager()
+
+    # Initialize window
+    window = StackedWidget(anki_service, deepl_service, googletrans_service, config)
     window.show()
-    
+
     with loop:
         loop.run_forever()
- 
+
+
 if __name__ == "__main__":
     main()
-    
