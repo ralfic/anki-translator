@@ -1,4 +1,10 @@
 build/
+dist/
+venv/
+
+config.json
+
+*.spec
 
 # Python cache/bytecode
 __pycache__/
@@ -12,3 +18,5 @@ __pycache__/
 *.swp
 
 *.egg-info/
+
+.env

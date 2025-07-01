@@ -1,4 +1,5 @@
-from .anki_api import AnkiConnect
-from .translation import TranslationService
+from .anki_service import AnkiService
+from .translators.googletrans_service import GoogleTransService
+from .translators.deepl_service import DeeplService
 
-__all__ = ["AnkiConnect", "TranslationService"]
+__all__ = ["AnkiService", "DeeplService", "GoogleTransService"]
