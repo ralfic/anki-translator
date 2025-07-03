@@ -16,7 +16,7 @@ class DeeplService:
         try:
             result = self.translator.translate_text(
                 text=text,
-                source_lang=self._is_en(source_lang),
+                source_lang=source_lang,
                 target_lang=self._is_en(target_lang),
             )
             return {
