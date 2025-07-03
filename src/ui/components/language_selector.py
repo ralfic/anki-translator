@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QComboBox
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QComboBox, QPushButton, QSizePolicy
 from PySide6.QtCore import Signal
 
 
@@ -21,8 +21,8 @@ class LanguageSelector(QWidget):
         self.setup_connections()
 
     def setup_ui(self):
-        self.layout = QHBoxLayout(self)
-        self.layout.setContentsMargins(8, 0, 8, 0)
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         self.from_combo = QComboBox()
         self.from_combo.addItems(self.languages)
@@ -34,12 +34,30 @@ class LanguageSelector(QWidget):
         self.to_combo.setToolTip("Select target language")
         self.to_combo.setCurrentText(self.default_target)
 
-        self.layout.addWidget(self.from_combo)
-        self.layout.addWidget(self.to_combo)
+        self.swap_btn = QPushButton("<>")
+        self.swap_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.swap_btn.clicked.connect(self.swap_languages)
+
+        layout.addWidget(self.from_combo)
+        layout.addWidget(self.swap_btn)
+        layout.addWidget(self.to_combo)
+
+        self.setLayout(layout)
 
     def setup_connections(self):
         self.from_combo.currentTextChanged.connect(self.on_language_changed)
         self.to_combo.currentTextChanged.connect(self.on_language_changed)
+
+    def swap_languages(self):
+        prev_from = self.from_combo.currentText()
+        prev_to = self.to_combo.currentText()
+        self.from_combo.setCurrentText(prev_to)
+        self.to_combo.setCurrentText(prev_from)
+        self.on_language_changed()
+
+    def refresh_values(self):
+        self.from_combo.setCurrentText(self.default_source)
+        self.to_combo.setCurrentText(self.default_target)
 
     def on_language_changed(self):
         self.language_changed.emit(self.source_language, self.target_language)

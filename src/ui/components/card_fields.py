@@ -55,6 +55,7 @@ class CardFields(QWidget):
         btn_layout = QHBoxLayout()
         btn_layout.addWidget(self.translate_btn)
         btn_layout.addWidget(self.add_note_btn)
+        btn_layout.setContentsMargins(0, 7, 0, 0)
         self.layout.addLayout(btn_layout)
 
         self.layout.addWidget(self.status_label)

@@ -14,13 +14,19 @@ from qasync import asyncSlot
 
 class MainPage(QMainWindow):
     def __init__(
-        self, anlki_service, deepl_service, googletrans_service, config: ConfigManager
+        self,
+        anlki_service,
+        deepl_service,
+        googletrans_service,
+        slovak_sk_service,
+        config: ConfigManager,
     ):
         super().__init__()
         # Services
         self.anki_service = anlki_service
         self.googletrans_service = googletrans_service
         self.deepl_service = deepl_service
+        self.slovak_sk_service = slovak_sk_service
 
         # Config
         self.config = config
@@ -35,8 +41,6 @@ class MainPage(QMainWindow):
 
         # Main layout
         main_layout = QVBoxLayout()
-        main_layout.setSpacing(0)
-        main_layout.setContentsMargins(5, 5, 5, 5)
 
         # Add components
         self.deck_selector = DeckSelector(
@@ -59,11 +63,10 @@ class MainPage(QMainWindow):
         comb_layout.addWidget(self.deck_selector)
         comb_layout.addWidget(self.model_selector)
         comb_layout.addWidget(self.translator_selector)
-        comb_widget = QWidget()
-        comb_widget.setLayout(comb_layout)
+        comb_layout.addWidget(self.language_selector)
+        comb_layout.setContentsMargins(7, 0, 7, 0)
 
-        main_layout.addWidget(comb_widget)
-        main_layout.addWidget(self.language_selector)
+        main_layout.addLayout(comb_layout)
         main_layout.addWidget(self.card_fields)
 
         container = QWidget()
@@ -86,6 +89,7 @@ class MainPage(QMainWindow):
 
     @asyncSlot()
     async def on_translate_requested(self):
+        self.card_fields.set_extra_translations("")
         source_text = self.card_fields.source_text
         source_lang = self.language_selector.source_language
         target_lang = self.language_selector.target_language
@@ -112,6 +116,22 @@ class MainPage(QMainWindow):
                     )
                     if translation:
                         self.card_fields.set_translation(translation.get("text"))
+                elif current_translator == "SlovakSk translator":
+                    translation = self.slovak_sk_service.translate(
+                        source_text, source_lang, target_lang
+                    )
+                    if translation:
+                        self.card_fields.set_translation(
+                            list(translation.values())[0][0]
+                        )
+                        self.card_fields.set_extra_translations(
+                            "\n".join(
+                                [
+                                    f"{k} - {f"\n{" " * ((len(k) * 2) + 3) }".join(v)}"
+                                    for k, v in translation.items()
+                                ]
+                            )
+                        )
 
             except Exception as e:
                 self.card_fields.set_status(f"Translation failed: {str(e)}", True)

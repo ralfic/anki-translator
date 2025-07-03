@@ -5,7 +5,6 @@ from PySide6.QtWidgets import (
     QWidget,
     QToolButton,
 )
-from PySide6.QtCore import Qt
 from ui.pages.main_page import MainPage
 from ui.pages.settings_page import SettingsPage
 from utils.styles import APP_STYLESHEET
@@ -18,6 +17,7 @@ class StackedWidget(QWidget):
         anlki_service,
         deepl_service,
         googletrans_service,
+        slovak_sk_service,
         config: ConfigManager,
         parent=None,
     ):
@@ -37,9 +37,9 @@ class StackedWidget(QWidget):
 
         # Create pages
         self.main_page = MainPage(
-            anlki_service, deepl_service, googletrans_service, config
+            anlki_service, deepl_service, googletrans_service, slovak_sk_service, config
         )
-        self.settings_page = SettingsPage(config)
+        self.settings_page = SettingsPage(config, anlki_service)
 
         # Add pages to stacked widget
         self.stacked_widget.addWidget(self.main_page)
@@ -73,11 +73,12 @@ class StackedWidget(QWidget):
         self.highlight_active_button(self.settings_action)
 
     def highlight_active_button(self, active_action):
-        """Visual feedback for active tab"""
         for action in self.toolbar.actions():
             widget = self.toolbar.widgetForAction(action)
             if isinstance(widget, QToolButton):
                 if action == active_action:
-                    widget.setStyleSheet("background-color: #ba4479;")
+                    widget.setStyleSheet(
+                        " background-color: #2b2b2b; border: 1px solid #888;border-radius: 4px;"
+                    )
                 else:
                     widget.setStyleSheet("")

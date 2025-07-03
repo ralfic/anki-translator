@@ -1,4 +1,4 @@
-from PySide6.QtCore import QObject, Signal, QTimer
+from PySide6.QtCore import QObject, Signal
 import clipboard
 from pynput import keyboard
 from pynput.keyboard import Listener

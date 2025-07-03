@@ -14,13 +14,14 @@ class DeeplService:
 
     def translate(self, text: str, source_lang: str, target_lang: str):
         try:
-            result = self.translator.translate_text(
+            resp = self.translator.translate_text(
                 text=text,
                 source_lang=source_lang,
                 target_lang=self._is_en(target_lang),
             )
+
             return {
-                "text": result.text,
+                "text": resp.text,
             }
         except Exception as e:
             raise TranslationError(f"Translation failed: {str(e)}")

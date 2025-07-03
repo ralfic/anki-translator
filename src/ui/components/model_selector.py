@@ -23,7 +23,7 @@ class ModelSelector(QComboBox):
             if models:
                 self.addItems(models)
         except Exception:
-            self.addItem("Error loading models")
+            self.setPlaceholderText("Error loading models")
             self.setDisabled(True)
 
         self.setCurrentText(self.default_model)
