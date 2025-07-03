@@ -1,93 +1,114 @@
 APP_STYLESHEET = """
-* { font-size: 14px; font-family: Arial, sans-serif; } 
-QHBoxLayout {padding: 0px; margin: 0px}
-
-QHBoxLayout {padding: 0px; margin: 0px}
-
-QLineEdit { 
-            background-color: #f0f0f0;
-            color: black; 
-            padding: 5px 3px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px;
-        } 
-QPushButton { 
-            color: white; 
-            padding: 4px 2px 4px 2px;
-             } 
-QComboBox {  
-            padding: 5px 3px; 
-        }
-QLabel { 
-            padding: 5px 3px; 
-        }
-QTextEdit { 
-            background-color: #f0f0f0;
-            color: black; 
-            padding: 5px 3px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px;
-        }
-
-QToolBar {
-    background-color: #2d2d2d;
-    border: none;
-    border-bottom: 1px solid #1e1e1e;
-    padding: 2x;
-    spacing: 2px;
+QWidget {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-family: Segoe UI, sans-serif;
+    font-size: 13px;
 }
 
-/* ToolButton styling */
+/* QToolBar Styling */
+QToolBar {
+    background-color: #3c3f41;
+    border-bottom: 1px solid #444;
+    spacing: 6px;
+    padding: 4px;
+}
+
 QToolButton {
     background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    padding: 2px 4x;
-    margin: 2px;
-    color: #e0e0e0;
+    color: #ffffff;
+    padding: 2px 4px;
+    border: none;
 }
 
-/* Button states */
 QToolButton:hover {
-    background-color: #ba4479;
-    border: 1px solid #4d4d4d;
+    background-color: #505050;
+    border-radius: 4px;
 }
 
 QToolButton:checked {
-    color: black;
-    background: #ba4479;
-    border: 1px solid #4d4d4d;
+    background-color: #2b2b2b;
+    border: 1px solid #888;
+    border-radius: 4px;
 }
 
-QToolButton: {
-    background: #ba4479;
-    border: 1px solid #4d4d4d;
-    
+QLineEdit, QTextEdit {
+    background-color: #3c3f41;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 4px;
 }
 
-/* Active button highlight */
-
-
-/* Separator styling */
-QToolBar::separator {
-    background-color: #ba4479;
-    width: 1px;
-    margin: 4px 6px;
+QComboBox QAbstractItemView {
+    background-color: #3c3f41;
+    selection-background-color: #5588ff;
+    color: #ffffff;
 }
 
-/* Dropdown arrow styling */
-QToolButton::menu-indicator {
-    image: none;
-    width: 0;
+QComboBox {
+    background-color: #3c3f41; /* Light: #ffffff */
+    color: #ffffff;            /* Light: #000000 */
+    border: 1px solid #555;    /* Light: #aaa */
+    border-radius: 4px;
+    padding: 4px;
+    padding-right: 20px; /* Space for arrow */
 }
 
-/* Icon-only buttons */
-QToolButton[popupMode="1"] {
-    padding-right: 6px;
+QComboBox:hover {
+    border: 1px solid #888;    /* Light: #888 */
 }
 
-/* Disabled buttons */
-QToolButton:disabled {
-    color: #606060;
+QComboBox:focus {
+    border: 1px solid #5588ff;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 18px;
+    border-left: 1px solid #555; /* Light: #aaa */
+    background-color: #444;      /* Light: #e0e0e0 */
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+QComboBox::down-arrow {
+    width: 12px;
+    height: 12px;
+}
+
+QPushButton {
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 6px;
+    color: #ffffff;
+}
+
+QPushButton:hover {
+    background-color: #555;
+}
+
+QPushButton:pressed {
+    background-color: #333;
+}
+
+QTabWidget::pane {
+    border: 1px solid #444;
+}
+
+QTabBar::tab {
+    background: #3c3f41;
+    color: #fff;
+    padding: 6px;
+    border: 1px solid #444;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+QTabBar::tab:selected {
+    background: #2b2b2b;
+    font-weight: bold;
 }
 """

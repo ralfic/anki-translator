@@ -7,16 +7,18 @@ class GoogleTransService:
         self.translator = Translator()
 
     @asyncSlot(str, str, str)
-    async def translate(self, text, source_lang, target_lang):
+    async def translate(self, text: str, source_lang: str, target_lang: str):
         try:
-            result = await self.translator.translate(
+            resp = await self.translator.translate(
                 text, src=source_lang, dest=target_lang
             )
+
             return {
-                "text": result.text,
-                "pronunciation": result.pronunciation,
-                "extra": result.extra_data,
+                "text": resp.text,
+                "pronunciation": resp.pronunciation,
+                "extra": resp.extra_data,
             }
+
         except Exception as e:
             raise TranslationError(f"Translation failed: {str(e)}")
 

@@ -5,7 +5,7 @@ from typing import Dict, Any
 DEFAULT_CONFIG = {
     "default_source": "EN",
     "default_target": "RU",
-    "translators": ["Googletrans"],
+    "translators": ["Googletrans", "Deepl translator", "SlovakSk translator"],
     "languages": ["EN", "RU"],
     "default_deck": "Default",
     "default_model": "Basic",

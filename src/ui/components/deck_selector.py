@@ -24,10 +24,13 @@ class DeckSelector(QComboBox):
             if decks:
                 self.addItems(decks)
         except Exception:
-            self.addItem("Error loading decks")
+            self.setPlaceholderText("Error loading decks")
             self.setDisabled(True)
 
         self.setCurrentText(self.default_deck)
+
+    def refresh_current_deck(self, deck: str):
+        self.setCurrentText(deck)
 
     @property
     def current_deck(self) -> str:
