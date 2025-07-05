@@ -87,6 +87,15 @@ class MainPage(QMainWindow):
         self.card_fields.translate_requested.connect(self.on_translate_requested)
         self.card_fields.add_note_requested.connect(self.on_add_note_requested)
 
+    def setup_default_values(self):
+        config_values = self.config.get()
+
+        self.language_selector.set_default_values(
+            config_values.get("default_source"), config_values.get("default_target")
+        )
+        self.deck_selector.set_default_values(config_values.get("default_deck"))
+        self.model_selector.set_default_values(config_values.get("default_module"))
+
     @asyncSlot()
     async def on_translate_requested(self):
         self.card_fields.set_extra_translations("")

@@ -34,6 +34,7 @@ def main():
     window = StackedWidget(
         anki_service, deepl_service, googletrans_service, slovak_sk_service, config
     )
+
     window.show()
 
     with loop:

@@ -9,14 +9,14 @@ class DeckSelector(QComboBox):
     def __init__(self, anki_service: AnkiService, default_deck: str, parent=None):
         super().__init__(parent)
         self.anki = anki_service
-        self.default_deck = default_deck
         self.setToolTip("Select target deck")
         self.setPlaceholderText("Select deck...")
 
         self.currentTextChanged.connect(self.deck_changed)
-        self.refresh_decks()
+        self.get_decks()
+        self.set_default_values(default_deck)
 
-    def refresh_decks(self):
+    def get_decks(self):
         self.clear()
 
         try:
@@ -27,9 +27,7 @@ class DeckSelector(QComboBox):
             self.setPlaceholderText("Error loading decks")
             self.setDisabled(True)
 
-        self.setCurrentText(self.default_deck)
-
-    def refresh_current_deck(self, deck: str):
+    def set_default_values(self, deck):
         self.setCurrentText(deck)
 
     @property
