@@ -9,14 +9,14 @@ class ModelSelector(QComboBox):
     def __init__(self, anki_service: AnkiService, default_model: str, parent=None):
         super().__init__(parent)
         self.anki = anki_service
-        self.default_model = default_model
         self.setToolTip("Select note type")
         self.setPlaceholderText("Select model...")
 
         self.currentTextChanged.connect(self.model_changed)
-        self.refresh_models()
+        self.get_models()
+        self.set_default_values(default_model)
 
-    def refresh_models(self):
+    def get_models(self):
         self.clear()
         try:
             models = self.anki.get_models()
@@ -26,7 +26,8 @@ class ModelSelector(QComboBox):
             self.setPlaceholderText("Error loading models")
             self.setDisabled(True)
 
-        self.setCurrentText(self.default_model)
+    def set_default_values(self, module):
+        self.setCurrentText(module)
 
     @property
     def current_model(self) -> str:

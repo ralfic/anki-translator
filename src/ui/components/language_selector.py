@@ -14,10 +14,9 @@ class LanguageSelector(QWidget):
     ):
         super().__init__(parent)
         self.languages = languages
-        self.default_source = default_source
-        self.default_target = default_target
 
         self.setup_ui()
+        self.set_default_values(default_source, default_target)
         self.setup_connections()
 
     def setup_ui(self):
@@ -27,12 +26,10 @@ class LanguageSelector(QWidget):
         self.from_combo = QComboBox()
         self.from_combo.addItems(self.languages)
         self.from_combo.setToolTip("Select source language")
-        self.from_combo.setCurrentText(self.default_source)
 
         self.to_combo = QComboBox()
         self.to_combo.addItems(self.languages)
         self.to_combo.setToolTip("Select target language")
-        self.to_combo.setCurrentText(self.default_target)
 
         self.swap_btn = QPushButton("<>")
         self.swap_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -55,9 +52,9 @@ class LanguageSelector(QWidget):
         self.to_combo.setCurrentText(prev_from)
         self.on_language_changed()
 
-    def refresh_values(self):
-        self.from_combo.setCurrentText(self.default_source)
-        self.to_combo.setCurrentText(self.default_target)
+    def set_default_values(self, s_l, t_l):
+        self.from_combo.setCurrentText(s_l)
+        self.to_combo.setCurrentText(t_l)
 
     def on_language_changed(self):
         self.language_changed.emit(self.source_language, self.target_language)
